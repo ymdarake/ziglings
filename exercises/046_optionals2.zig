@@ -22,7 +22,7 @@ const std = @import("std");
 
 const Elephant = struct {
     letter: u8,
-    tail: *Elephant = null, // Hmm... tail needs something...
+    tail: ?*Elephant = null, // Hmm... tail needs something...
     visited: bool = false,
 };
 
@@ -45,6 +45,7 @@ pub fn main() void {
     std.debug.print("\n", .{});
 }
 
+// コメントアウトしてある例示部分をためすために?になってるけど、一般的には?にしないほうが良さそう？
 // If e1 and e2 are valid pointers to elephants,
 // this function links the elephants so that e1's tail "points" to e2.
 fn linkElephants(e1: ?*Elephant, e2: ?*Elephant) void {
@@ -66,6 +67,6 @@ fn visitElephants(first_elephant: *Elephant) void {
 
         // HINT: We want something similar to what `.?` does,
         // but instead of ending the program, we want to exit the loop...
-        e = e.tail ???
+        e = e.tail orelse break;
     }
 }
